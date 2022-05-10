@@ -12,12 +12,13 @@ import { Vue } from "vue-class-component";
 
 export default class TodoList extends Vue {
   todoText = "";
-  todoList = [];
+  //todoList: object[];
 
   addTodo() {
     let newTodo: Todo = new Todo(this.todoText);
-    this.todoList.push(newTodo);
-    console.log(this.todoList);
+    //this.todoList.push(newTodo);
+    //console.log(this.todoList);
+    this.$emit("sendTodo", newTodo);
   }
 }
 </script>
