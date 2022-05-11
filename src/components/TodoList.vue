@@ -1,10 +1,14 @@
 <template>
   <div>
-    <CreateTodo @sendTodo="handleTodo($event)"></CreateTodo>
+    <CreateTodo @sendTodo="getTodo($event)"></CreateTodo>
+    <ul v-for="(todo, i) in todoArray" :key="i">
+      <li>{{ todo.text }}</li>
+    </ul>
   </div>
 </template>
 
 <script lang="ts">
+import { Todo } from "../models/Todo";
 import { Options, Vue } from "vue-class-component";
 import CreateTodo from "./CreateTodo.vue";
 @Options({
@@ -13,8 +17,14 @@ import CreateTodo from "./CreateTodo.vue";
   },
 })
 export default class TodoList extends Vue {
-  handleTodo(t: object) {
-    console.log("Emit successful", t);
+  result = "";
+  todoArray: Todo[] = [];
+
+  getTodo(data: string) {
+    this.result = data;
+    let newTodo: Todo = new Todo(this.result);
+    this.todoArray.push(newTodo);
+    console.log(this.todoArray);
   }
 }
 </script>

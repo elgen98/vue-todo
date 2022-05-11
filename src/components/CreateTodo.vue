@@ -1,24 +1,22 @@
 <template>
   <div>
     <label for="todo">What's your next todo?</label>
-    <input type="text" v-model="todoText" />
+    <input type="text" v-model="userInput" />
     <button @click="addTodo">Add Todo</button>
   </div>
 </template>
 
 <script lang="ts">
-import { Todo } from "../models/Todo";
 import { Vue } from "vue-class-component";
 
 export default class TodoList extends Vue {
-  todoText = "";
-  //todoList: object[];
+  userInput = "";
 
   addTodo() {
-    let newTodo: Todo = new Todo(this.todoText);
-    //this.todoList.push(newTodo);
-    //console.log(this.todoList);
-    this.$emit("sendTodo", newTodo);
+    if (this.userInput.length > 0) {
+      this.$emit("sendTodo", this.userInput);
+      this.userInput = "";
+    } else alert("Input is empty!");
   }
 }
 </script>
