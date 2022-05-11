@@ -2,7 +2,10 @@
   <div>
     <CreateTodo @sendTodo="getTodo($event)"></CreateTodo>
     <ul v-for="(todo, i) in todoArray" :key="i">
-      <li>{{ todo.text }}</li>
+      <li :class="todo.done ? 'checked' : 'unchecked'">
+        {{ todo.text }}
+      </li>
+      <input type="checkbox" @click="checkTodo(i)" />
     </ul>
   </div>
 </template>
@@ -26,7 +29,16 @@ export default class TodoList extends Vue {
     this.todoArray.push(newTodo);
     console.log(this.todoArray);
   }
+
+  checkTodo(itemIndex: number) {
+    this.todoArray[itemIndex].done = true;
+  }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.checked {
+  text-decoration-line: line-through;
+  opacity: 0.5;
+}
+</style>
