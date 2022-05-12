@@ -1,11 +1,16 @@
 <template>
   <div>
     <CreateTodo @sendTodo="getTodo($event)"></CreateTodo>
-    <ul v-for="(todo, i) in todoArray" :key="i">
-      <li :class="todo.done ? 'checked' : 'unchecked'">
+    <ul>
+      <li
+        v-for="(todo, i) in todoArray"
+        :key="i"
+        :class="todo.done ? 'checked' : 'unchecked'"
+      >
         {{ todo.text }}
+        <input type="checkbox" @click="todo.done = !todo.done" />
+        <button @click="this.todoArray.splice(i, 1)">Delete</button>
       </li>
-      <input type="checkbox" @click="checkTodo(i)" />
     </ul>
   </div>
 </template>
@@ -30,9 +35,15 @@ export default class TodoList extends Vue {
     console.log(this.todoArray);
   }
 
-  checkTodo(itemIndex: number) {
-    this.todoArray[itemIndex].done = true;
-  }
+  /* deleteTodo(i: number) {
+    this.todoArray.splice(i, 1);
+  } */
+
+  /* checkTodo(itemIndex: number) {
+    this.todoArray[itemIndex].done = this.todoArray[itemIndex].done
+      ? false
+      : true;
+  } */
 }
 </script>
 
