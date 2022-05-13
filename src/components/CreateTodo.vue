@@ -1,9 +1,11 @@
 <template>
-  <div>
+  <section>
     <label for="todo">What's your next todo?</label>
-    <input type="text" v-model="userInput" />
-    <button @click="addTodo">Add Todo</button>
-  </div>
+    <div>
+      <input type="text" v-model="userInput" @keypress.enter="addTodo" />
+      <button @click="addTodo">Add</button>
+    </div>
+  </section>
 </template>
 
 <script lang="ts">
@@ -11,6 +13,7 @@ import { Vue } from "vue-class-component";
 
 export default class TodoList extends Vue {
   userInput = "";
+  errorMsg = "";
 
   addTodo() {
     if (this.userInput.length > 0) {
@@ -21,4 +24,25 @@ export default class TodoList extends Vue {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+label {
+  font-family: "Lucida Sans";
+}
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  div {
+    max-width: 177px;
+
+    button {
+      cursor: pointer;
+      width: 15%;
+      position: relative;
+      left: 80%;
+      border: none;
+      background-color: white;
+    }
+  }
+}
+</style>

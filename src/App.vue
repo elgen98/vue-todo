@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <TodoList></TodoList>
-  </div>
+  <TodoList></TodoList>
 </template>
 
 <script lang="ts">
@@ -16,4 +14,11 @@ import TodoList from "./components/TodoList.vue";
 export default class App extends Vue {}
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+body {
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+</style>
