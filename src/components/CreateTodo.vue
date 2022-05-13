@@ -32,16 +32,25 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  label {
+    color: #322e99;
+  }
   div {
     max-width: 177px;
 
+    input {
+      background-color: #ffee99;
+      border: 1px solid;
+      border-radius: 5px;
+    }
     button {
       cursor: pointer;
       width: 15%;
       position: relative;
       left: 80%;
       border: none;
-      background-color: white;
+      background-color: #e6d374;
+      color: #7773e6;
     }
   }
 }
