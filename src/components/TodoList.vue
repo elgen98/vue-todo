@@ -3,16 +3,14 @@
     <TodoCounter :counter="todoAmount"></TodoCounter>
     <CreateTodo @sendTodo="getTodo($event)"></CreateTodo>
     <ul>
-      <li
-        v-for="(todo, i) in todoArray"
-        :key="i"
-        :class="todo.done ? 'checked' : 'unchecked'"
-      >
+      <li v-for="(todo, i) in todoArray" :key="i">
         <label class="checkbox-label">
           <input type="checkbox" @click="todo.done = !todo.done" />
           <span class="checkbox-custom"></span>
         </label>
-        <strong>{{ todo.text }}</strong>
+        <strong :class="todo.done ? 'checked' : 'unchecked'">{{
+          todo.text
+        }}</strong>
         <button @click="deleteTodo(i)">Delete</button>
       </li>
     </ul>
@@ -47,12 +45,6 @@ export default class TodoList extends Vue {
     this.todoArray.splice(i, 1);
     this.todoAmount = this.todoArray.length;
   }
-
-  /* checkTodo(itemIndex: number) {
-    this.todoArray[itemIndex].done = this.todoArray[itemIndex].done
-      ? false
-      : true;
-  } */
 }
 </script>
 
@@ -140,7 +132,7 @@ main {
     }
   }
 }
-.checked > strong {
+.checked {
   text-decoration-line: line-through;
   opacity: 0.5;
 }

@@ -4,6 +4,7 @@
     <div>
       <input type="text" v-model="userInput" @keypress.enter="addTodo" />
       <button @click="addTodo">Add</button>
+      <small> {{ errorMsg }} </small>
     </div>
   </section>
 </template>
@@ -19,13 +20,17 @@ export default class TodoList extends Vue {
     if (this.userInput.length > 0) {
       this.$emit("sendTodo", this.userInput);
       this.userInput = "";
-    } else alert("Input is empty!");
+      this.errorMsg = "";
+    } else {
+      this.errorMsg = "Input is empty!";
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-label {
+label,
+small {
   font-family: "Lucida Sans";
 }
 section {
@@ -51,6 +56,9 @@ section {
       border: none;
       background-color: #e6d374;
       color: #7773e6;
+    }
+    small {
+      color: red;
     }
   }
 }
