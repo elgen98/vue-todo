@@ -17,5 +17,6 @@ div {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   position: relative;
   left: 50%;
+  color: #998a3d;
 }
 </style>

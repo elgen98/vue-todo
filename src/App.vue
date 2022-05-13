@@ -20,5 +20,6 @@ body {
   margin: 0 auto;
   display: flex;
   justify-content: center;
+  background-color: #e6d374;
 }
 </style>

@@ -3,13 +3,14 @@
     <TodoCounter :counter="todoAmount"></TodoCounter>
     <CreateTodo @sendTodo="getTodo($event)"></CreateTodo>
     <ul>
-      <li
-        v-for="(todo, i) in todoArray"
-        :key="i"
-        :class="todo.done ? 'checked' : 'unchecked'"
-      >
-        <input type="checkbox" @click="todo.done = !todo.done" />
-        <strong>{{ todo.text }}</strong>
+      <li v-for="(todo, i) in todoArray" :key="i">
+        <label class="checkbox-label">
+          <input type="checkbox" @click="todo.done = !todo.done" />
+          <span class="checkbox-custom"></span>
+        </label>
+        <strong :class="todo.done ? 'checked' : 'unchecked'">{{
+          todo.text
+        }}</strong>
         <button @click="deleteTodo(i)">Delete</button>
       </li>
     </ul>
@@ -44,12 +45,6 @@ export default class TodoList extends Vue {
     this.todoArray.splice(i, 1);
     this.todoAmount = this.todoArray.length;
   }
-
-  /* checkTodo(itemIndex: number) {
-    this.todoArray[itemIndex].done = this.todoArray[itemIndex].done
-      ? false
-      : true;
-  } */
 }
 </script>
 
@@ -69,14 +64,75 @@ main {
       justify-content: space-between;
       gap: 50px;
       word-break: break-all;
+      border-bottom: 1px solid #998a3d;
+      margin-bottom: 10px;
+      input {
+        position: absolute;
+        opacity: 0;
+      }
+
+      .checkbox-label .checkbox-custom {
+        position: absolute;
+        cursor: pointer;
+        height: 18px;
+        width: 18px;
+        background-color: transparent;
+        border-radius: 50%;
+        border: 2px solid white;
+        transition: all 0.1s ease-out;
+      }
+      .checkbox-label .checkbox-custom::after {
+        position: absolute;
+        content: "";
+        height: 0px;
+        width: 0px;
+        border-radius: 50%;
+        border: solid #e6d374;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(0deg) scale(0);
+        -ms-transform: rotate(0deg) scale(0);
+        transform: rotate(0deg) scale(0);
+        opacity: 1;
+        transition: all 0.1s ease-out;
+      }
+
+      .checkbox-label input:checked ~ .checkbox-custom {
+        background-color: white;
+        border-radius: 50%;
+        -webkit-transform: rotate(0deg) scale(1);
+        -ms-transform: rotate(0deg) scale(1);
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+        border: 2px solid white;
+      }
+
+      .checkbox-label input:checked ~ .checkbox-custom::after {
+        -webkit-transform: rotate(45deg) scale(1);
+        -ms-transform: rotate(45deg) scale(1);
+        transform: rotate(45deg) scale(1);
+        opacity: 1;
+        left: 5px;
+        top: -1px;
+        width: 6px;
+        height: 12px;
+        border: solid #e6d374;
+        border-width: 0 3px 3px 0;
+        background-color: transparent;
+        border-radius: 0;
+      }
+
       button {
         word-break: keep-all;
         height: 25px;
+        border: none;
+        background-color: #e6d374;
+        color: red;
+        cursor: pointer;
       }
     }
   }
 }
-.checked > strong {
+.checked {
   text-decoration-line: line-through;
   opacity: 0.5;
 }
